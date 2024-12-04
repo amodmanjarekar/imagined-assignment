@@ -90,3 +90,27 @@ export async function updateUser(
     next(err);
   }
 }
+
+export async function deleteUser(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    res.status(404).send("Invalid User ID");
+  }
+  try {
+    const getUser = await UserModel.findByIdAndDelete(req.params.id);
+
+    if (!getUser) {
+      res.status(404).send("No User found for that ID");
+    } else {
+      res
+        .status(200)
+        .send(`User ${getUser.name} with User ID ${getUser._id} deleted.`);
+    }
+  } catch (err) {
+    console.log(err);
+    next(err);
+  }
+}
