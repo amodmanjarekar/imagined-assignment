@@ -17,6 +17,12 @@ mongoose.connect(
 
 app.use(express.json());
 
+app.get("/", (req, res) => {
+  res.send(
+    "Documentation can be found at https://github.com/amodmanjarekar/imagined-assignment/blob/main/README.md"
+  );
+});
+
 app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);
 app.use("/api/orders", orderRouter);
