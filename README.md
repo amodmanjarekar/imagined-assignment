@@ -57,20 +57,22 @@ Order
 1. `GET` /api/users - [Get All Users](#get-list-of-all-users)
 2. `GET` /api/users/{user_id} - [Get One User](#get-a-specific-user)
 3. `GET` /api/users/by-email/{email} - [Get User by email](#get-a-specific-user-by-its-email)
-4. `POST` /api/users/create - [Create User](#create-a-new-user)
-5. `PATCH` /api/users/{user_id} - [Update a User](#update-an-existing-user)
-6. `GET` /api/users/{user_id}/orders - [Get all Orders of a User](#get-all-orders-of-a-user)
-7. `DELETE` /api/users/delete/{user_id} - [Delete a User](#delete-a-user)
+4. `GET` /api/users/by-name/{name} - [Get User by name](#get-a-specific-user-by-its-name)
+5. `POST` /api/users/create - [Create User](#create-a-new-user)
+6. `PATCH` /api/users/{user_id} - [Update a User](#update-an-existing-user)
+7. `GET` /api/users/{user_id}/orders - [Get all Orders of a User](#get-all-orders-of-a-user)
+8. `DELETE` /api/users/delete/{user_id} - [Delete a User](#delete-a-user)
 
 ### For Products
 
 1. `GET` /api/products - [Get All Products](#get-list-of-all-products)
 2. `GET` /api/products/{product_id} - [Get One Product](#get-a-specific-product)
-3. `POST` /api/products/create - [Create Product](#create-a-new-product)
-4. `PATCH` /api/products/{product_id} - [Update a Product](#update-an-existing-product)
-5. `GET` /api/products/stock - [Get total stock](#get-a-total-of-all-products-in-stock)
-6. `GET` /api/products/{product_id}/bought-by - [Get Users for Product](#get-all-users-who-bought-product)
-7. `DELETE` /api/products/delete/{product_id} - [Delete a Product](#delete-a-product)
+3. `GET` /api/products/by-name/{name} - [Get Product by name](#get-a-specific-product-by-its-name)
+4. `POST` /api/products/create - [Create Product](#create-a-new-product)
+5. `PATCH` /api/products/{product_id} - [Update a Product](#update-an-existing-product)
+6. `GET` /api/products/stock - [Get total stock](#get-a-total-of-all-products-in-stock)
+7. `GET` /api/products/{product_id}/bought-by - [Get Users for Product](#get-all-users-who-bought-product)
+8. `DELETE` /api/products/delete/{product_id} - [Delete a Product](#delete-a-product)
 
 ### For Orders
 
@@ -134,6 +136,29 @@ Returns: `JSON` User object</br>
   "name": "Jack",
   "email": "jack@example.com",
   "phone": "1213334445",
+  "__v": 0
+}
+```
+
+### Get a specific User by its name
+
+Returns a single User and its properties if the name matches.</br>
+
+Endpoint: `GET /api/users/by-name/{name}` </br>
+Returns: `JSON` User object</br>
+
+#### Example Request:
+
+> (GET) https://imagined-assignment.vercel.app/api/users/by-name/Jill
+
+#### Example Response:
+
+```json
+{
+  "_id": "675181ee4f3b0cc1ff66102a",
+  "name": "Jill",
+  "email": "jill@example.com",
+  "phone": "5555544444",
   "__v": 0
 }
 ```
@@ -331,6 +356,30 @@ Returns: `JSON` Product object</br>
   "category": "Electronics",
   "price": 25,
   "stock": 1000,
+  "__v": 0
+}
+```
+
+### Get a specific User by its name
+
+Returns a single User and its properties if the name matches.</br>
+
+Endpoint: `GET /api/users/by-name/{name}` </br>
+Returns: `JSON` User object</br>
+
+#### Example Request:
+
+> (GET) https://imagined-assignment.vercel.app/api/products/by-name/Black Leather Shoes
+
+#### Example Response:
+
+```json
+{
+  "_id": "67518a766a251af18b82e628",
+  "name": "Black Leather Shoes",
+  "category": "Footwear",
+  "price": 250,
+  "stock": 249,
   "__v": 0
 }
 ```

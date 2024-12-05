@@ -54,6 +54,19 @@ export async function stockQuantity(req: Request, res: Response) {
   }
 }
 
+export async function getByName(req: Request, res: Response) {
+  try {
+    const getProduct = await ProductModel.findOne({ name: req.params.name });
+
+    res.status(200).json(getProduct);
+  } catch (err) {
+    res.status(400).json({
+      status: "Failed",
+      message: err,
+    });
+  }
+}
+
 // COMMON FUNCTIONS (getAll, getOne, create, update, delete)
 export async function getAllProducts(req: Request, res: Response) {
   commonHandlers.getAllItems(ProductModel, req, res);

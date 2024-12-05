@@ -11,6 +11,7 @@ userRouter.route("/delete/:id").delete(userController.deleteUser);
 
 userRouter.route("/").get(userController.getAllUsers);
 
+userRouter.route("/by-name/:name").get(userController.getByName);
 userRouter.route("/by-email/:email").get(userController.getByEmail);
 
 userRouter

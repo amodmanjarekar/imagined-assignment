@@ -20,6 +20,19 @@ export async function getAllOrders(req: Request, res: Response) {
   }
 }
 
+export async function getByName(req: Request, res: Response) {
+  try {
+    const getUser = await UserModel.findOne({ name: req.params.name });
+
+    res.status(200).json(getUser);
+  } catch (err) {
+    res.status(400).json({
+      status: "Failed",
+      message: err,
+    });
+  }
+}
+
 export async function getByEmail(req: Request, res: Response) {
   try {
     const getUser = await UserModel.findOne({ email: req.params.email });

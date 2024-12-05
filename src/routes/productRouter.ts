@@ -13,6 +13,8 @@ productRouter.route("/delete/:id").delete(productController.deleteProduct);
 
 productRouter.route("/").get(productController.getAllProducts);
 
+productRouter.route("/by-name/:name").get(productController.getByName);
+
 productRouter
   .route("/:id")
   .get(productController.getProduct)
