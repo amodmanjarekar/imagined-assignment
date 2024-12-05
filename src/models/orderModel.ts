@@ -1,4 +1,13 @@
-import mongoose from "mongoose";
+import mongoose, { Date } from "mongoose";
+
+export interface Order {
+  placedBy: mongoose.Types.ObjectId;
+  products: {
+    product: mongoose.Types.ObjectId;
+    quantity: Number;
+  }[];
+  orderDate: Date;
+}
 
 const orderSchema = new mongoose.Schema({
   placedBy: {
@@ -27,4 +36,4 @@ const orderSchema = new mongoose.Schema({
   },
 });
 
-export const OrderModel = mongoose.model("Order", orderSchema);
+export const OrderModel = mongoose.model<Order>("Order", orderSchema);
