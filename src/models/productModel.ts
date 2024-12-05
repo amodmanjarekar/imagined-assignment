@@ -8,10 +8,10 @@ export interface Product {
 }
 
 const productSchema = new mongoose.Schema({
-  name: String,
-  category: String,
-  price: { type: Number, required: true },
-  stock: { type: Number, required: true, default: 0 },
+  name: { type: String },
+  category: { type: String, enum: ["Footwear", "Clothing", "Electronics"] },
+  price: { type: Number, required: true, min: 0 },
+  stock: { type: Number, required: true, min: 0, default: 0 },
 });
 
 export const ProductModel = mongoose.model<Product>("Product", productSchema);

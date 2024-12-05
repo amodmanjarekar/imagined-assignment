@@ -1,4 +1,5 @@
 import mongoose, { Date } from "mongoose";
+import validator from "validator";
 
 export interface Order {
   placedBy: mongoose.Types.ObjectId;
@@ -14,6 +15,7 @@ const orderSchema = new mongoose.Schema({
     type: mongoose.SchemaTypes.ObjectId,
     required: [true, "Please enter the ID of a User. (string)"],
     ref: "User",
+    validate: mongoose.Types.ObjectId.isValid,
   },
   products: [
     {
@@ -21,11 +23,12 @@ const orderSchema = new mongoose.Schema({
         type: mongoose.SchemaTypes.ObjectId,
         required: [true, "Please enter the ID of a product. (string)"],
         ref: "Product",
+        validate: mongoose.Types.ObjectId.isValid,
       },
       quantity: {
         type: Number,
         required: [true, "Please enter the quantity for this product. (int)"],
-        default: 0,
+        min: 1,
       },
     },
   ],
@@ -33,6 +36,7 @@ const orderSchema = new mongoose.Schema({
     type: Date,
     required: [true, "Please enter a date. (string)"],
     default: Date.now(),
+    validate: validator.isDate,
   },
 });
 
