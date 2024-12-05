@@ -4,7 +4,7 @@ import * as commonHandlers from "./commonHandlers";
 import { UserModel } from "../models/userModel";
 import { OrderModel } from "../models/orderModel";
 
-// SPECIFIC FUNCTIONS (getAllOrders)
+// SPECIFIC FUNCTIONS (getAllOrders, getByName)
 export async function getAllOrders(req: Request, res: Response) {
   try {
     const orderList = await OrderModel.find({
@@ -15,6 +15,19 @@ export async function getAllOrders(req: Request, res: Response) {
   } catch (err) {
     res.status(400).json({
       satus: "Failed",
+      message: err,
+    });
+  }
+}
+
+export async function getByEmail(req: Request, res: Response) {
+  try {
+    const getUser = await UserModel.findOne({ email: req.params.email });
+
+    res.status(200).json(getUser);
+  } catch (err) {
+    res.status(400).json({
+      status: "Failed",
       message: err,
     });
   }

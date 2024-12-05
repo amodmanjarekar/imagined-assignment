@@ -56,10 +56,11 @@ Order
 
 1. `GET` /api/users - [Get All Users](#get-list-of-all-users)
 2. `GET` /api/users/{user_id} - [Get One User](#get-a-specific-user)
-3. `POST` /api/users/create - [Create User](#create-a-new-user)
-4. `PATCH` /api/users/{user_id} - [Update a User](#update-an-existing-user)
-5. `GET` /api/users/{user_id}/orders - [Get all Orders of a User](#get-all-orders-of-a-user)
-6. `DELETE` /api/users/delete/{user_id} - [Delete a User](#delete-a-user)
+3. `GET` /api/users/by-email/{email} - [Get User by email](#get-a-specific-user-by-its-email)
+4. `POST` /api/users/create - [Create User](#create-a-new-user)
+5. `PATCH` /api/users/{user_id} - [Update a User](#update-an-existing-user)
+6. `GET` /api/users/{user_id}/orders - [Get all Orders of a User](#get-all-orders-of-a-user)
+7. `DELETE` /api/users/delete/{user_id} - [Delete a User](#delete-a-user)
 
 ### For Products
 
@@ -133,6 +134,29 @@ Returns: `JSON` User object</br>
   "name": "Jack",
   "email": "jack@example.com",
   "phone": "1213334445",
+  "__v": 0
+}
+```
+
+### Get a specific User by its email
+
+Returns a single User and its properties if the email matches.</br>
+
+Endpoint: `GET /api/users/by-email/{email}` </br>
+Returns: `JSON` User object</br>
+
+#### Example Request:
+
+> (GET) https://imagined-assignment.vercel.app/api/users/by-email/jill@example.com
+
+#### Example Response:
+
+```json
+{
+  "_id": "675181ee4f3b0cc1ff66102a",
+  "name": "Jill",
+  "email": "jill@example.com",
+  "phone": "5555544444",
   "__v": 0
 }
 ```
