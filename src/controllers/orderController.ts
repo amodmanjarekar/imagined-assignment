@@ -34,7 +34,7 @@ export async function createOrder(req: Request, res: Response) {
   commonHandlers.createItem(OrderModel, req, res, {
     placedBy: new mongoose.Types.ObjectId(req.body.placedBy),
     products: productArray,
-    orderDate: new Date(),
+    orderDate: req.body.orderDate,
   });
 }
 
