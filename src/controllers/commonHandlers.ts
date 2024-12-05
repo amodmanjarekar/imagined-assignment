@@ -30,9 +30,7 @@ export async function getOneItem(
 ) {
   if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
     res.status(404).send("Invalid Item ID");
-  }
-
-  try {
+  } else {
     const getItem = await model.findById(req.params.id);
 
     if (!getItem) {
@@ -40,9 +38,6 @@ export async function getOneItem(
     } else {
       res.status(200).json(getItem);
     }
-  } catch (err) {
-    console.log(err);
-    res.status(400).json(failedJson(err));
   }
 }
 
@@ -71,9 +66,7 @@ export async function updateItem(
 ) {
   if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
     res.status(404).send("Invalid Item ID");
-  }
-
-  try {
+  } else {
     const getItem = await model.findByIdAndUpdate(req.params.id, updateObject, {
       new: true,
     });
@@ -83,9 +76,6 @@ export async function updateItem(
     }
 
     res.status(200).json(getItem);
-  } catch (err) {
-    console.log(err);
-    res.status(400).json(failedJson(err));
   }
 }
 
@@ -96,8 +86,7 @@ export async function deleteItem(
 ) {
   if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
     res.status(404).send("Invalid Item ID");
-  }
-  try {
+  } else {
     const getItem = await model.findByIdAndDelete(req.params.id);
 
     if (!getItem) {
@@ -111,8 +100,5 @@ export async function deleteItem(
           } deleted.`
         );
     }
-  } catch (err) {
-    console.log(err);
-    res.status(400).json(failedJson(err));
   }
 }
