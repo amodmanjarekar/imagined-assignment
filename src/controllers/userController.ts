@@ -2,7 +2,25 @@ import { NextFunction, Request, Response } from "express";
 import mongoose from "mongoose";
 import * as commonHandlers from "./commonHandlers";
 import { UserModel } from "../models/userModel";
+import { OrderModel } from "../models/orderModel";
 
+// SPECIFIC FUNCTIONS (getAllOrders)
+export async function getAllOrders(req: Request, res: Response) {
+  try {
+    const orderList = await OrderModel.find({
+      placedBy: new mongoose.Types.ObjectId(req.params.id),
+    });
+
+    res.status(200).json(orderList);
+  } catch (err) {
+    res.status(400).json({
+      satus: "Failed",
+      message: err,
+    });
+  }
+}
+
+// COMMON FUNCTIONS (getAll, getOne, create, update, delete)
 export async function getAllUsers(req: Request, res: Response) {
   commonHandlers.getAllItems(UserModel, req, res);
 }
