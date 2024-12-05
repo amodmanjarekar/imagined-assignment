@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import mongoose from "mongoose";
 import * as commonHandlers from "./commonHandlers";
 import { OrderModel } from "../models/orderModel";
+import { ProductModel } from "../models/productModel";
 
 // UTILITIES
 function populateProducts(products: any[]) {
@@ -16,6 +17,10 @@ function populateProducts(products: any[]) {
       product: new mongoose.Types.ObjectId(item.product),
       quantity: item.quantity,
     });
+
+    ProductModel.findByIdAndUpdate(item.product, {
+      $inc: { stock: -item.quantity },
+    }).exec();
   });
 
   return productArray;
@@ -50,7 +55,15 @@ export async function getOrder(req: Request, res: Response) {
 }
 
 export async function createOrder(req: Request, res: Response) {
-  const productArray = populateProducts(req.body.products);
+  let productArray;
+  try {
+    productArray = populateProducts(req.body.products);
+  } catch (err) {
+    res.status(400).json({
+      status: "Failed",
+      message: err,
+    });
+  }
 
   commonHandlers.createItem(OrderModel, req, res, {
     placedBy: new mongoose.Types.ObjectId(req.body.placedBy),

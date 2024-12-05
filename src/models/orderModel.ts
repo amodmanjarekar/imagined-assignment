@@ -1,5 +1,6 @@
 import mongoose, { Date } from "mongoose";
 import validator from "validator";
+import { ProductModel } from "./productModel";
 
 export interface Order {
   placedBy: mongoose.Types.ObjectId;
