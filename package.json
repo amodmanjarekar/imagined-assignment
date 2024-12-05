@@ -4,6 +4,7 @@
   "description": "e-commerce api",
   "main": "src/app.ts",
   "scripts": {
+    "build": "npx tsc",
     "dev": "nodemon src/app.ts"
   },
   "author": "",
