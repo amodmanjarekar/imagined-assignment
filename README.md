@@ -10,7 +10,7 @@ This API provides a set of HTTP endpoints to facilitate CRUD operations on a Mon
 
 ### User Model
 
-```json
+```
 User
 {
   "_id": ObjectId() (auto-generated), // Automatically generated
@@ -22,7 +22,7 @@ User
 
 ### Product Model
 
-```json
+```
 Product
 {
   "_id": ObjectId() (auto-generated), // Automatically generated
@@ -35,7 +35,7 @@ Product
 
 ### Order Model
 
-```json
+```
 Order
 {
   "_id": ObjectId() (auto-generated), // Automatically generated
@@ -52,10 +52,33 @@ Order
 
 ## Endpoints
 
-<!-- - Users
-  1. `GET` /api/users/ - [Get All Users](#get-list-of-all-users)
-  2. `GET` /api/users/{user_id} - [Get One User](#get-a-specific-user)
-  3. `` -->
+### For Users
+
+1. `GET` /api/users - [Get All Users](#get-list-of-all-users)
+2. `GET` /api/users/{user_id} - [Get One User](#get-a-specific-user)
+3. `POST` /api/users/create - [Create User](#create-a-new-user)
+4. `PATCH` /api/users/{user_id} - [Update a User](#update-an-existing-user)
+5. `GET` /api/users/{user_id}/orders - [Get all Orders of a User](#get-all-orders-of-a-user)
+6. `DELETE` /api/users/delete/{user_id} - [Delete a User](#delete-a-user)
+
+### For Products
+
+1. `GET` /api/products - [Get All Products](#get-list-of-all-products)
+2. `GET` /api/products/{product_id} - [Get One Product](#get-a-specific-product)
+3. `POST` /api/products/create - [Create Product](#create-a-new-product)
+4. `PATCH` /api/products/{product_id} - [Update a Product](#update-an-existing-product)
+5. `GET` /api/products/stock - [Get total stock](#get-a-total-of-all-products-in-stock)
+6. `GET` /api/products/{product_id}/bought-by - [Get Users for Product](#get-all-users-who-bought-product)
+7. `DELETE` /api/products/delete/{product_id} - [Delete a Product](#delete-a-product)
+
+### For Orders
+
+1. `GET` /api/orders - [Get All Orders](#get-list-of-all-orders)
+2. `GET` /api/orders/{order_id} - [Get One Order](#get-a-specific-order)
+3. `POST` /api/orders/create - [Create Order](#create-a-new-order)
+4. `PATCH` /api/orders/{order_id} - [Update an Order](#update-an-existing-order)
+5. `GET` /api/orders/recent - [Get Orders within last 7 days](#get-recent-orders)
+6. `DELETE` /api/orders/delete/{order_id} - [Delete an Order](#delete-an-order)
 
 <!-- USERS -->
 
@@ -638,10 +661,19 @@ Returns: Delete action status.</br>
 
 #### Example Request:
 
-> (POST) https://imagined-assignment.vercel.app/api/orers/delete/67518c766a251af18b82e641
+> (POST) https://imagined-assignment.vercel.app/api/orders/delete/67518c766a251af18b82e641
 
 #### Example Response:
 
 ```
 Order with ID 67518c766a251af18b82e641 deleted
 ```
+
+## Building
+
+To build this project,
+
+1. Clone the repository.
+2. In the root directory, run `npm install` to install all required dependencies.
+3. Make sure that mongod is running.
+4. Run `npm run dev` in the root directory.
