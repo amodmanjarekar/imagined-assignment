@@ -4,12 +4,14 @@ const orderSchema = new mongoose.Schema({
   placedBy: {
     type: mongoose.SchemaTypes.ObjectId,
     required: [true, "Please enter the ID of a User. (string)"],
+    ref: "User",
   },
   products: [
     {
       product: {
         type: mongoose.SchemaTypes.ObjectId,
         required: [true, "Please enter the ID of a product. (string)"],
+        ref: "Product",
       },
       quantity: {
         type: Number,
