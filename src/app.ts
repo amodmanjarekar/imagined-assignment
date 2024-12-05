@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 
 import userRouter from "./routes/userRouter";
 import productRouter from "./routes/productRouter";
+import orderRouter from "./routes/orderRouter";
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ app.use(express.json());
 
 app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);
+app.use("/api/orders", orderRouter);
 
 app.listen(port, () => {
   console.log(`listening on ${port}`);
