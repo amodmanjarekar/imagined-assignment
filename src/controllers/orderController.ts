@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import * as commonHandlers from "./commonHandlers";
 import { OrderModel } from "../models/orderModel";
 
+// UTILITIES
 function populateProducts(products: any[]) {
   interface ProductInterface {
     product: mongoose.Types.ObjectId;
@@ -20,6 +21,26 @@ function populateProducts(products: any[]) {
   return productArray;
 }
 
+// SPECIFIC FUNCTIONS (getRecent)
+export async function getRecentOrders(req: Request, res: Response) {
+  const dateNow = new Date();
+  const date7DaysAgo = new Date(new Date().setDate(dateNow.getDate() - 7));
+
+  try {
+    const recentOrders = await OrderModel.find({
+      orderDate: { $gte: date7DaysAgo },
+    });
+
+    res.status(200).json(recentOrders);
+  } catch (err) {
+    res.status(400).json({
+      status: "Failed",
+      message: err,
+    });
+  }
+}
+
+// COMMON FUNCTIONS (getAll, getOne, create, update, delete)
 export async function getAllOrders(req: Request, res: Response) {
   commonHandlers.getAllItems(OrderModel, req, res);
 }

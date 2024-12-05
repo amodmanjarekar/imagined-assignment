@@ -3,6 +3,8 @@ import express from "express";
 const orderRouter = express.Router();
 import * as orderController from "../controllers/orderController";
 
+orderRouter.route("/recent").get(orderController.getRecentOrders);
+
 orderRouter.route("/create").post(orderController.createOrder);
 
 orderRouter.route("/delete/:id").delete(orderController.deleteOrder);
