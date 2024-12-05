@@ -5,7 +5,7 @@ import * as orderController from "../controllers/orderController";
 
 orderRouter.route("/create").post(orderController.createOrder);
 
-orderRouter.route("/delete/:id").post(orderController.deleteOrder);
+orderRouter.route("/delete/:id").delete(orderController.deleteOrder);
 
 orderRouter.route("/").get(orderController.getAllOrders);
 

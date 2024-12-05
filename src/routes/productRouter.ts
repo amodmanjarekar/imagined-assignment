@@ -5,7 +5,7 @@ import * as productController from "../controllers/productController";
 
 productRouter.route("/create").post(productController.createProduct);
 
-productRouter.route("/delete/:id").post(productController.deleteProduct);
+productRouter.route("/delete/:id").delete(productController.deleteProduct);
 
 productRouter.route("/").get(productController.getAllProducts);
 
