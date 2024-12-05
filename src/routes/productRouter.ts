@@ -3,7 +3,7 @@ import express from "express";
 const productRouter = express.Router();
 import * as productController from "../controllers/productController";
 
-productRouter.route("/:id/boughtby").get(productController.getBoughtByUsers);
+productRouter.route("/:id/bought-by").get(productController.getBoughtByUsers);
 
 productRouter.route("/stock").get(productController.stockQuantity);
 
