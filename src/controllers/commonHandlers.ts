@@ -103,7 +103,13 @@ export async function deleteItem(
     if (!getItem) {
       res.status(404).send("No Item found for that ID");
     } else {
-      res.status(200).send(`${getItem.name} with ID ${getItem._id} deleted.`);
+      res
+        .status(200)
+        .send(
+          `${getItem.name ? getItem.name : "Order"} with ID ${
+            getItem._id
+          } deleted.`
+        );
     }
   } catch (err) {
     console.log(err);
