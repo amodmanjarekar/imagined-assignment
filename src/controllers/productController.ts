@@ -2,7 +2,59 @@ import { NextFunction, Request, Response } from "express";
 import mongoose from "mongoose";
 import * as commonHandlers from "./commonHandlers";
 import { ProductModel } from "../models/productModel";
+import { OrderModel } from "../models/orderModel";
+import { User } from "../models/userModel";
 
+// SPECIFIC FUNCTIONS (getBoughtByUsers, stockQuantity)
+export async function getBoughtByUsers(req: Request, res: Response) {
+  interface BoughtByFormat {
+    name: string;
+    orderId: mongoose.Types.ObjectId;
+  }
+
+  var boughtBy: BoughtByFormat[] = [];
+
+  try {
+    const orderList = await OrderModel.find({
+      products: {
+        $elemMatch: {
+          product: new mongoose.Types.ObjectId(req.params.id),
+        },
+      },
+    }).populate<{ placedBy: User }>("placedBy");
+
+    orderList.forEach((order) => {
+      boughtBy.push({
+        name: order.placedBy.name,
+        orderId: order._id,
+      });
+    });
+
+    res.status(200).json(boughtBy);
+  } catch (err) {
+    res.status(400).json({
+      status: "Failed",
+      message: err,
+    });
+  }
+}
+
+export async function stockQuantity(req: Request, res: Response) {
+  try {
+    const total = await ProductModel.aggregate([
+      { $group: { _id: null, amount: { $sum: "$stock" } } },
+    ]);
+
+    res.status(200).json(total);
+  } catch (err) {
+    res.status(400).json({
+      status: "Failed",
+      message: err,
+    });
+  }
+}
+
+// COMMON FUNCTIONS (getAll, getOne, create, update, delete)
 export async function getAllProducts(req: Request, res: Response) {
   commonHandlers.getAllItems(ProductModel, req, res);
 }

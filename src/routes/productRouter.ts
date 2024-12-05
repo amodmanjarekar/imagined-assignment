@@ -3,6 +3,10 @@ import express from "express";
 const productRouter = express.Router();
 import * as productController from "../controllers/productController";
 
+productRouter.route("/:id/boughtby").get(productController.getBoughtByUsers);
+
+productRouter.route("/stock").get(productController.stockQuantity);
+
 productRouter.route("/create").post(productController.createProduct);
 
 productRouter.route("/delete/:id").delete(productController.deleteProduct);
